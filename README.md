@@ -1,3 +1,13 @@
+## 🚀 v2.0 Update
+
+- Added PDF-based AI summarization using a local LLM (Ollama)
+- Full-document summarization via intelligent chunking
+- No external APIs or rate limits
+- Improved stability and performance over v1.0
+
+> v1.0 focused on note-based inputs.  
+> v2.0 extends the system to work directly with PDFs.
+
 # AI PDF Study Assistant (v1.0)
 
 **Author:** Swapnil Tiwari  
