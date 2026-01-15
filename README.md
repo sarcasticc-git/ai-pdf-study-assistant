@@ -1,3 +1,5 @@
+## Version
+v2.1 – Groq-powered summarization, MCQs & Q&A (stable)
 ﻿🚀 v2.0 Update
 • Added PDF-based AI summarization using a local LLM (Ollama)
 • Full-document summarization via intelligent chunking
