@@ -1,5 +1,6 @@
 import streamlit as st
-import PyPDF2
+from pdf_utils import extract_text_from_pdf
+from llm_utils import llm_summary, llm_mcqs, llm_qa
 
 st.set_page_config(page_title="AI PDF Study Assistant", layout="centered")
 
@@ -8,27 +9,32 @@ st.write("Upload a PDF and generate summaries, MCQs, and exam questions.")
 
 uploaded_file = st.file_uploader("Upload your PDF", type=["pdf"])
 
-def extract_text_from_pdf(file):
-    reader = PyPDF2.PdfReader(file)
-    text = ""
-    for page in reader.pages:
-        if page.extract_text():
-            text += page.extract_text() + "\n"
-    return text
-
-if uploaded_file is not None:
+if uploaded_file:
     st.success("PDF uploaded successfully!")
 
-    # Extract text
     pdf_text = extract_text_from_pdf(uploaded_file)
 
-    # DEBUG: show text length
-    st.info(f"Extracted {len(pdf_text)} characters from PDF")
+    if pdf_text.strip():
+        st.subheader("Choose an action")
 
-    # Show button ONLY after extraction
-    if st.button("✨ Generate Output"):
-        if len(pdf_text.strip()) == 0:
-            st.error("No text found in PDF (scanned PDF maybe).")
-        else:
-            st.subheader("📘 Extracted Text Preview")
-            st.text_area("Preview", pdf_text[:3000], height=300)
+        col1, col2, col3 = st.columns(3)
+
+        with col1:
+            if st.button("📌 Generate Summary"):
+                with st.spinner("Generating summary..."):
+                    st.subheader("Summary")
+                    st.write(llm_summary(pdf_text))
+
+        with col2:
+            if st.button("📝 Generate MCQs"):
+                with st.spinner("Generating MCQs..."):
+                    st.subheader("MCQs")
+                    st.write(llm_mcqs(pdf_text))
+
+        with col3:
+            if st.button("❓ Generate Q&A"):
+                with st.spinner("Generating Q&A..."):
+                    st.subheader("Q&A")
+                    st.write(llm_qa(pdf_text))
+    else:
+        st.warning("Could not extract text from PDF.")
