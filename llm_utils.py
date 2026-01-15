@@ -4,7 +4,7 @@ from pdf_utils import chunk_text
 
 client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
-MODEL = "llama3-70b-8192"
+MODEL = "llama-3.1-8b-instant"
 
 
 def groq_generate(system_prompt, user_text, max_tokens=250):
