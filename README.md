@@ -7,6 +7,7 @@
 
 > v1.0 focused on note-based inputs.  
 > v2.0 extends the system to work directly with PDFs.
+> v2.1 adds MCQ and exam-style Q&A generation using a local LLM (Ollama).
 
 # AI PDF Study Assistant (v1.0)
 
