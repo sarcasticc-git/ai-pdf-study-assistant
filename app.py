@@ -10,7 +10,7 @@ st.write("Upload a PDF and generate summaries, MCQs, and exam questions.")
 uploaded_file = st.file_uploader("Upload your PDF", type=["pdf"])
 
 if uploaded_file:
-    st.success("PDF uploaded successfully!")
+    st.success("PDF uploaded successfully")
 
     pdf_text = extract_text_from_pdf(uploaded_file)
 
@@ -22,19 +22,16 @@ if uploaded_file:
         with col1:
             if st.button("📌 Generate Summary"):
                 with st.spinner("Generating summary..."):
-                    st.subheader("Summary")
                     st.write(llm_summary(pdf_text))
 
         with col2:
             if st.button("📝 Generate MCQs"):
                 with st.spinner("Generating MCQs..."):
-                    st.subheader("MCQs")
                     st.write(llm_mcqs(pdf_text))
 
         with col3:
             if st.button("❓ Generate Q&A"):
                 with st.spinner("Generating Q&A..."):
-                    st.subheader("Q&A")
                     st.write(llm_qa(pdf_text))
     else:
         st.warning("Could not extract text from PDF.")
